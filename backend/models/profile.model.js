@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-const eductionSchema = new mongoose.Schema({
+const educationSchema = new mongoose.Schema({
     school: {
         type: String,
         default: ""
@@ -13,7 +13,7 @@ const eductionSchema = new mongoose.Schema({
         type: String,
         default: ""
     } 
-}),
+});
 
 const workSchema = new mongoose.Schema({
     company: {
@@ -28,7 +28,7 @@ const workSchema = new mongoose.Schema({
         type: String,
         default: ""
     }
-}),
+});
 
 const ProfileSchema = new mongoose.Schema({
     userId: {
@@ -51,8 +51,8 @@ const ProfileSchema = new mongoose.Schema({
         type: [educationSchema],
         default: []
     }
-})
+});
 
-const Porfile = mongoose.model("Profile", ProfileSchema);
+const Profile = mongoose.model("Profile", ProfileSchema);
 
 export default Profile;
