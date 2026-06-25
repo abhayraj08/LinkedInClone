@@ -55,9 +55,28 @@ export const login = async (req, res) => {
 
         const token = crypto.randomBytes(32).toString("hex");
 
-        await User.findByIdAndUpdate(user._id, token);
+        user.token = token;
+        await user.save();
 
         return res.json({ token });
+
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
+}
+
+export const uploadProfilePicture = async (req, res) => {
+    const { token } = req.body;
+
+    try {
+        const user = await User.findOne({ token: token });
+
+        if (!user) return res.status(200).json({ message: "User does not exist" });
+
+        user.profilePicture = req.file.filename;
+        await user.save();
+
+        return res.json({ message: "Profile Picture Updated" });
 
     } catch (err) {
         return res.status(500).json({ message: err.message });
